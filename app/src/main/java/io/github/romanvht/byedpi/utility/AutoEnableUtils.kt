@@ -2,10 +2,12 @@ package io.github.romanvht.byedpi.utility
 
 import android.content.Context
 import androidx.core.content.edit
+import android.net.VpnService
 import io.github.romanvht.byedpi.data.AppStatus
 import io.github.romanvht.byedpi.data.Mode
 import io.github.romanvht.byedpi.services.AppAutoEnableUsageService
 import io.github.romanvht.byedpi.services.ServiceManager
+import io.github.romanvht.byedpi.services.AppKeepAliveService
 import io.github.romanvht.byedpi.services.appStatus
 import io.github.romanvht.byedpi.utility.InAppLog
 
@@ -16,6 +18,7 @@ object AutoEnableUtils {
     const val PREF_AUTO_DISABLE_SERVICE = "applist_whitelist_auto_disable_service"
     const val PREF_AUTO_STOP_ON_EXIT = "applist_whitelist_auto_stop_on_exit"
     const val PREF_AUTO_STRICT = "applist_whitelist_auto_strict"
+    const val PREF_KEEP_ALIVE = "applist_whitelist_keep_alive"
 
     const val METHOD_USAGE_STATS = "usage_stats"
     const val METHOD_ACCESSIBILITY = "accessibility"
@@ -31,8 +34,15 @@ object AutoEnableUtils {
         val prefs = context.getPreferences()
         val shouldMonitor = shouldMonitor(prefs)
         val strict = prefs.getBoolean(PREF_AUTO_STRICT, false)
+        val keepAlive = prefs.getBoolean(PREF_KEEP_ALIVE, false) || strict
         val method = if (strict) METHOD_ACCESSIBILITY
         else prefs.getStringNotNull(PREF_AUTO_METHOD, METHOD_USAGE_STATS)
+
+        if (keepAlive && shouldMonitor) {
+            AppKeepAliveService.start(context)
+        } else {
+            AppKeepAliveService.stop(context)
+        }
 
         if (method == METHOD_USAGE_STATS) {
             if (shouldMonitor && UsageAccessUtils.hasUsageAccess(context)) {
@@ -92,6 +102,10 @@ object AutoEnableUtils {
             if (appStatus.first != AppStatus.Running) {
                 val stable = now - lastPackageChangeMs > START_STABLE_MS
                 if (stable && now - lastStartMs > START_COOLDOWN_MS) {
+                    if (VpnService.prepare(context) != null) {
+                        InAppLog.w(context, "AutoEnable", "VPN permission not granted, skip start")
+                        return
+                    }
                     InAppLog.i(context, "AutoEnable", "Start VPN for $packageName")
                     ServiceManager.start(context, Mode.VPN)
                     lastStartMs = now
