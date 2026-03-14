@@ -4,18 +4,15 @@ English | [Русский](README.md) | [Türkçe](README-tr.md)
 
 Local Android client for ByeDPI. The app runs a local proxy and routes traffic through it. It is **not** a remote VPN server and does not send traffic anywhere.
 
-## Media
-![Logo](docs/images/logo.png)
+<p align="center">
+  <img src="docs/images/logo_round.png" alt="ByeByeBanana icon" width="160" />
+</p>
 
-**App icon**
-![Icon](docs/images/icon.png)
-
-**Buttons**
-![Start](docs/images/buttons/btn_on.png)
-![Stop](docs/images/buttons/btn_off.png)
-
-**Download**
-[![Download APK](docs/images/buttons/btn_download.png)](https://github.com/Bebrazui/ByeByeBanana/releases)
+<p align="center">
+  <a href="https://github.com/Bebrazui/ByeByeBanana/releases">
+    <img src="docs/images/buttons/btn_download.png" alt="Download APK" width="220" />
+  </a>
+</p>
 
 ## Features
 - Auto‑enable for whitelist apps (Accessibility, strict mode, keep‑alive)

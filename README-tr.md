@@ -4,18 +4,15 @@ Türkçe | [Русский](README.md) | [English](README-en.md)
 
 ByeDPI için yerel Android istemcisi. Uygulama yerel bir proxy çalıştırır ve trafiği buradan geçirir. **Uzak VPN sunucusu değildir** ve trafik başka bir yere gönderilmez.
 
-## Medya
-![Logo](docs/images/logo.png)
+<p align="center">
+  <img src="docs/images/logo_round.png" alt="ByeByeBanana icon" width="160" />
+</p>
 
-**Uygulama ikonu**
-![Ikon](docs/images/icon.png)
-
-**Butonlar**
-![Başlat](docs/images/buttons/btn_on.png)
-![Durdur](docs/images/buttons/btn_off.png)
-
-**İndirme**
-[![APK İndir](docs/images/buttons/btn_download.png)](https://github.com/Bebrazui/ByeByeBanana/releases)
+<p align="center">
+  <a href="https://github.com/Bebrazui/ByeByeBanana/releases">
+    <img src="docs/images/buttons/btn_download.png" alt="APK İndir" width="220" />
+  </a>
+</p>
 
 ## Özellikler
 - Beyaz liste için otomatik etkinleştirme (Accessibility, sıkı mod, keep‑alive)

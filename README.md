@@ -4,18 +4,15 @@
 
 Локальный Android‑клиент для ByeDPI. Приложение поднимает локальный прокси и перенаправляет трафик через него. Это **не** удалённый VPN‑сервер и трафик никуда не отправляется.
 
-## Медиа
-![Логотип](docs/images/logo.png)
+<p align="center">
+  <img src="docs/images/logo_round.png" alt="ByeByeBanana icon" width="160" />
+</p>
 
-**Иконка приложения**
-![Иконка](docs/images/icon.png)
-
-**Кнопки**
-![Включить](docs/images/buttons/btn_on.png)
-![Выключить](docs/images/buttons/btn_off.png)
-
-**Загрузка**
-[![Скачать APK](docs/images/buttons/btn_download.png)](https://github.com/Bebrazui/ByeByeBanana/releases)
+<p align="center">
+  <a href="https://github.com/Bebrazui/ByeByeBanana/releases">
+    <img src="docs/images/buttons/btn_download.png" alt="Скачать APK" width="220" />
+  </a>
+</p>
 
 ## Возможности
 - Автовключение для белого списка приложений (Accessibility, стабильный режим, keep‑alive)
