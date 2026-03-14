@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="languages">
         <item name="system">Auto</item>
@@ -26,4 +26,10 @@
         <item name="blacklist">Blacklist</item>
         <item name="whitelist">Whitelist</item>
     </array>
+
+    <array name="applist_auto_enable_methods">
+        <item name="usage_stats">Usage access</item>
+        <item name="accessibility">Accessibility service</item>
+    </array>
 </resources>
+

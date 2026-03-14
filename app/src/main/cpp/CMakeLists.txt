@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.22.1)
 
 project(byedpi_native)
 
-file(GLOB BYE_DPI_SRC byedpi/*.c)
+file(GLOB_RECURSE BYE_DPI_SRC CONFIGURE_DEPENDS byedpi/*.c)
 list(REMOVE_ITEM BYE_DPI_SRC ${CMAKE_CURRENT_SOURCE_DIR}/byedpi/win_service.c)
 
 add_library(byedpi SHARED ${BYE_DPI_SRC} native-lib.c)

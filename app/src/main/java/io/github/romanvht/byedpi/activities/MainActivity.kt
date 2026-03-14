@@ -216,6 +216,22 @@ class MainActivity : BaseActivity() {
         super.onResume()
         updateStatus()
         updateButtonsVisibility()
+        AutoEnableUtils.updateMonitoring(this)
+        UpdateUtils.checkForUpdates(this, this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val prefs = getPreferences()
+        val stopOnExit = prefs.getBoolean(AutoEnableUtils.PREF_AUTO_STOP_ON_EXIT, false)
+        if (stopOnExit &&
+            prefs.mode() == Mode.VPN &&
+            prefs.getStringNotNull("applist_type", "disable") == "whitelist" &&
+            prefs.getBoolean(AutoEnableUtils.PREF_AUTO_ENABLE, false) &&
+            appStatus.first == AppStatus.Running
+        ) {
+            ServiceManager.stop(this)
+        }
     }
 
     override fun onDestroy() {

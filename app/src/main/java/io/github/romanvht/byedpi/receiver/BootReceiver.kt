@@ -7,6 +7,7 @@ import android.net.VpnService
 import android.os.SystemClock
 import io.github.romanvht.byedpi.data.Mode
 import io.github.romanvht.byedpi.services.ServiceManager
+import io.github.romanvht.byedpi.utility.AutoEnableUtils
 import io.github.romanvht.byedpi.utility.getPreferences
 import io.github.romanvht.byedpi.utility.mode
 
@@ -35,6 +36,8 @@ class BootReceiver : BroadcastReceiver() {
                     Mode.Proxy -> ServiceManager.start(context, Mode.Proxy)
                 }
             }
+
+            AutoEnableUtils.updateMonitoring(context)
         }
     }
 }

@@ -1,6 +1,6 @@
-<resources>
+﻿<resources>
     <string name="byedpi_docs">https://github.com/hufrea/byedpi/blob/main/README.md</string>
-    <string name="app_name">ByeByeDPI</string>
+    <string name="app_name">ByeByeBanana</string>
     <string name="cmd_documentation">Dökümantasyon</string>
     <string name="toggle_connect">Aç/Kapa</string>
     <string name="vpn_connect">Bağlan</string>
@@ -182,3 +182,5 @@
     <string name="main_btn_test">Test</string>
     <string name="main_btn_list">Listeler</string>
 </resources>
+
+

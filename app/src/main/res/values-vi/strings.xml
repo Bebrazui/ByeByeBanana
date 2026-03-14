@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="byedpi_docs">https://github.com/hufrea/byedpi/blob/main/README.md</string>
-    <string name="app_name">ByeByeDPI</string>
+    <string name="app_name">ByeByeBanana</string>
     <string name="cmd_documentation">Tài liệu</string>
     <string name="toggle_connect">Bật/Tắt</string>
     <string name="vpn_connect">Kết nối</string>
@@ -183,3 +183,4 @@
     <string name="main_btn_test">Kiểm tra</string>
     <string name="main_btn_list">Danh sách</string>
 </resources>
+

@@ -1,6 +1,6 @@
-<resources>
+﻿<resources>
     <string name="byedpi_docs">https://github.com/hufrea/byedpi/blob/main/README.md</string>
-    <string name="app_name">ByeByeDPI</string>
+    <string name="app_name">ByeByeBanana</string>
     <string name="cmd_documentation">ByeDPI документациясы</string>
     <string name="toggle_connect">Қосу/Сөнд</string>
     <string name="vpn_connect">Қосылу</string>
@@ -182,3 +182,5 @@
     <string name="main_btn_test">Тест</string>
     <string name="main_btn_list">Тізімдер</string>
 </resources>
+
+

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="languages">
         <item name="system">Автоматически</item>
@@ -75,4 +75,14 @@
         <item name="blacklist">blacklist</item>
         <item name="whitelist">whitelist</item>
     </array>
+
+    <array name="applist_auto_enable_methods">
+        <item name="usage_stats">Статистика использования</item>
+        <item name="accessibility">Служба доступности</item>
+    </array>
+    <array name="applist_auto_enable_methods_entries">
+        <item name="usage_stats">usage_stats</item>
+        <item name="accessibility">accessibility</item>
+    </array>
 </resources>
+

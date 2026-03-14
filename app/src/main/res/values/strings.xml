@@ -1,6 +1,6 @@
-<resources>
+﻿<resources>
     <string name="byedpi_docs">https://github.com/hufrea/byedpi/blob/main/README.md</string>
-    <string name="app_name">ByeByeDPI</string>
+    <string name="app_name">ByeByeBanana</string>
     <string name="cmd_documentation">Документация ByeDPI</string>
     <string name="toggle_connect">Вкл/Выкл</string>
     <string name="vpn_connect">Подключить</string>
@@ -177,8 +177,25 @@
     <string name="domain_list_added">Список доменов добавлен</string>
     <string name="domain_list_updated">Список доменов обновлен</string>
     <string name="domain_list_update_failed">Не удалось обновить список доменов</string>
+    <string name="update_available_title">Доступно обновление</string>
+    <string name="update_available_message">Найдено обновление: %1$s. Установить?</string>
+    <string name="update_action">Обновить</string>
     <string name="domain_list_deleted">Список доменов удален</string>
     <string name="domain_list_delete_failed">Не удалось удалить список доменов</string>
     <string name="main_btn_test">Подбор</string>
     <string name="main_btn_list">Списки</string>
+    <string name="applist_whitelist_auto_enable_title">Автовключение для белого списка</string>
+    <string name="applist_whitelist_auto_enable_summary">Автоматически включает сервис при запуске приложений из белого списка</string>
+    <string name="applist_whitelist_auto_enable_method_title">Метод отслеживания</string>
+    <string name="applist_whitelist_auto_stop_on_exit_title">Отключать VPN при выходе из приложения</string>
+    <string name="applist_whitelist_auto_stop_on_exit_summary">Работает вместе с автовключением для белого списка</string>
+    <string name="applist_whitelist_auto_disable_service_title">Отключить службу автовключения</string>
+    <string name="applist_whitelist_auto_disable_service_summary">Полностью отключает службу мониторинга, если она мешает</string>
+    <string name="auto_enable_channel_name">Автовключение</string>
+    <string name="auto_enable_notification_content">Мониторинг приложений для автовключения</string>
+    <string name="auto_enable_accessibility_label">Автовключение ByeByeDPI</string>
+    <string name="auto_enable_accessibility_description">Отслеживает открытые приложения, чтобы включать сервис для белого списка</string>
 </resources>
+
+
+

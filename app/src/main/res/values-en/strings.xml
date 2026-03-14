@@ -1,6 +1,6 @@
-<resources>
+﻿<resources>
     <string name="byedpi_docs">https://github.com/hufrea/byedpi/blob/main/README.md</string>
-    <string name="app_name">ByeByeDPI</string>
+    <string name="app_name">ByeByeBanana</string>
     <string name="cmd_documentation">Documentation</string>
     <string name="toggle_connect">On/Off</string>
     <string name="vpn_connect">Connect</string>
@@ -177,8 +177,24 @@
     <string name="domain_list_added">Domain list added</string>
     <string name="domain_list_updated">Domain list updated</string>
     <string name="domain_list_update_failed">Failed to update domain list</string>
+    <string name="update_available_title">Update available</string>
+    <string name="update_available_message">An update is available: %1$s. Install now?</string>
+    <string name="update_action">Update</string>
     <string name="domain_list_deleted">Domain list deleted</string>
     <string name="domain_list_delete_failed">Failed to delete domain list</string>
     <string name="main_btn_test">Test</string>
     <string name="main_btn_list">Lists</string>
-</resources>
+    <string name="applist_whitelist_auto_enable_title">Auto-enable for whitelist</string>
+    <string name="applist_whitelist_auto_enable_summary">Automatically starts the service when whitelist apps open</string>
+    <string name="applist_whitelist_auto_enable_method_title">Tracking method</string>
+    <string name="applist_whitelist_auto_stop_on_exit_title">Disable VPN on app exit</string>
+    <string name="applist_whitelist_auto_stop_on_exit_summary">Works together with whitelist auto-enable</string>
+    <string name="applist_whitelist_auto_disable_service_title">Disable auto-enable service</string>
+    <string name="applist_whitelist_auto_disable_service_summary">Turns off the monitoring service if it causes issues</string>
+    <string name="auto_enable_channel_name">Auto enable</string>
+    <string name="auto_enable_notification_content">Monitoring apps for auto-enable</string>
+    <string name="auto_enable_accessibility_label">ByeByeDPI auto enable</string>
+    <string name="auto_enable_accessibility_description">Monitors opened apps to auto-enable the service for whitelist</string></resources>
+
+
+

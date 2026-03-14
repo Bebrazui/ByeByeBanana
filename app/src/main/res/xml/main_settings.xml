@@ -62,6 +62,36 @@
             android:title="@string/apps_select"
             app:fragment="io.github.romanvht.byedpi.fragments.AppSelectionFragment" />
 
+        <SwitchPreference
+            android:key="applist_whitelist_auto_enable"
+            android:icon="@drawable/ic_power"
+            android:title="@string/applist_whitelist_auto_enable_title"
+            android:summary="@string/applist_whitelist_auto_enable_summary"
+            android:defaultValue="false" />
+
+        <ListPreference
+            android:key="applist_whitelist_auto_enable_method"
+            android:icon="@drawable/ic_tune"
+            android:title="@string/applist_whitelist_auto_enable_method_title"
+            android:entries="@array/applist_auto_enable_methods"
+            android:entryValues="@array/applist_auto_enable_methods_entries"
+            android:summary="%s"
+            android:defaultValue="usage_stats" />
+
+        <SwitchPreference
+            android:key="applist_whitelist_auto_stop_on_exit"
+            android:icon="@drawable/ic_power"
+            android:title="@string/applist_whitelist_auto_stop_on_exit_title"
+            android:summary="@string/applist_whitelist_auto_stop_on_exit_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreference
+            android:key="applist_whitelist_auto_disable_service"
+            android:icon="@drawable/material_alert"
+            android:title="@string/applist_whitelist_auto_disable_service_title"
+            android:summary="@string/applist_whitelist_auto_disable_service_summary"
+            android:defaultValue="false" />
+
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

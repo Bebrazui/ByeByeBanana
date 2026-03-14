@@ -3,12 +3,14 @@ package io.github.romanvht.byedpi.fragments
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import androidx.preference.*
 import io.github.romanvht.byedpi.R
 import io.github.romanvht.byedpi.BuildConfig
 import io.github.romanvht.byedpi.activities.TestActivity
 import io.github.romanvht.byedpi.data.Mode
+import io.github.romanvht.byedpi.services.AppAutoEnableAccessibilityService
 import io.github.romanvht.byedpi.utility.*
 
 class MainSettingsFragment : PreferenceFragmentCompat() {
@@ -19,6 +21,7 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
     private val preferenceListener =
         SharedPreferences.OnSharedPreferenceChangeListener { _, _ ->
             updatePreferences()
+            AutoEnableUtils.updateMonitoring(requireContext())
         }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -62,6 +65,26 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
         findPreferenceNotNull<Preference>("version").summary = BuildConfig.VERSION_NAME
         findPreferenceNotNull<Preference>("byedpi_version").summary = "0.17.3"
 
+        val autoEnable = findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_enable")
+        val autoEnableMethod =
+            findPreferenceNotNull<ListPreference>("applist_whitelist_auto_enable_method")
+
+        autoEnable.setOnPreferenceChangeListener { _, newValue ->
+            if (newValue as Boolean) {
+                requestAutoEnablePermission(autoEnableMethod.value)
+            }
+            AutoEnableUtils.updateMonitoring(requireContext())
+            true
+        }
+
+        autoEnableMethod.setOnPreferenceChangeListener { _, newValue ->
+            if (autoEnable.isChecked) {
+                requestAutoEnablePermission(newValue as String)
+            }
+            AutoEnableUtils.updateMonitoring(requireContext())
+            true
+        }
+
         updatePreferences()
     }
 
@@ -85,6 +108,13 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
 
         val applistType = findPreferenceNotNull<ListPreference>("applist_type")
         val selectedApps = findPreferenceNotNull<Preference>("selected_apps")
+        val autoEnable = findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_enable")
+        val autoEnableMethod =
+            findPreferenceNotNull<ListPreference>("applist_whitelist_auto_enable_method")
+        val autoDisableService =
+            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_disable_service")
+        val autoStopOnExit =
+            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_stop_on_exit")
         val batteryOptimization = findPreferenceNotNull<Preference>("battery_optimization")
         val storageAccess = findPreferenceNotNull<Preference>("storage_access")
 
@@ -112,14 +142,29 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                     "disable" -> {
                         applistType.isVisible = true
                         selectedApps.isVisible = false
+                        autoEnable.isVisible = false
+                        autoEnableMethod.isVisible = false
+                        autoDisableService.isVisible = false
+                        autoStopOnExit.isVisible = false
                     }
                     "blacklist", "whitelist" -> {
                         applistType.isVisible = true
                         selectedApps.isVisible = true
+                        autoEnable.isVisible = applistType.value == "whitelist"
+                        autoEnableMethod.isVisible =
+                            applistType.value == "whitelist" && autoEnable.isChecked
+                        autoDisableService.isVisible =
+                            applistType.value == "whitelist" && autoEnable.isChecked
+                        autoStopOnExit.isVisible =
+                            applistType.value == "whitelist" && autoEnable.isChecked
                     }
                     else -> {
                         applistType.isVisible = true
                         selectedApps.isVisible = false
+                        autoEnable.isVisible = false
+                        autoEnableMethod.isVisible = false
+                        autoDisableService.isVisible = false
+                        autoStopOnExit.isVisible = false
                         Log.w(TAG, "Unexpected applistType value: ${applistType.value}")
                     }
                 }
@@ -130,6 +175,10 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                 ipv6.isVisible = false
                 applistType.isVisible = false
                 selectedApps.isVisible = false
+                autoEnable.isVisible = false
+                autoEnableMethod.isVisible = false
+                autoDisableService.isVisible = false
+                autoStopOnExit.isVisible = false
             }
         }
 
@@ -143,6 +192,25 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
             storageAccess.summary = getString(R.string.storage_access_allowed_summary)
         } else {
             storageAccess.summary = getString(R.string.storage_access_summary)
+        }
+    }
+
+    private fun requestAutoEnablePermission(method: String) {
+        when (method) {
+            AutoEnableUtils.METHOD_USAGE_STATS -> {
+                if (!UsageAccessUtils.hasUsageAccess(requireContext())) {
+                    startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                }
+            }
+            AutoEnableUtils.METHOD_ACCESSIBILITY -> {
+                if (!AccessibilityUtils.isServiceEnabled(
+                        requireContext(),
+                        AppAutoEnableAccessibilityService::class.java
+                    )
+                ) {
+                    startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }
+            }
         }
     }
 }

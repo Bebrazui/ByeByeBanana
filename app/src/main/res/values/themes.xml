@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <style name="Theme.ByeDPI" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">#5976DF</item>
         <item name="colorPrimaryVariant">#3C52A3</item>
@@ -31,3 +31,4 @@
         <!-- -->
     </style>
 </resources>
+
