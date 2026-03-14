@@ -74,12 +74,6 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
         val autoEnable = findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_enable")
         val autoEnableMethod =
             findPreferenceNotNull<ListPreference>("applist_whitelist_auto_enable_method")
-        val autoStrict =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_strict")
-        val autoStopOnExit =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_stop_on_exit")
-        val keepAlive =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_keep_alive")
 
         autoEnable.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {
@@ -93,22 +87,6 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
             if (autoEnable.isChecked) {
                 requestAutoEnablePermission(newValue as String)
             }
-            AutoEnableUtils.updateMonitoring(requireContext())
-            true
-        }
-
-        autoStrict.setOnPreferenceChangeListener { _, newValue ->
-            val enabled = newValue as Boolean
-            if (enabled) {
-                autoEnableMethod.value = AutoEnableUtils.METHOD_ACCESSIBILITY
-                autoStopOnExit.isChecked = false
-                requestAutoEnablePermission(AutoEnableUtils.METHOD_ACCESSIBILITY)
-            }
-            AutoEnableUtils.updateMonitoring(requireContext())
-            true
-        }
-
-        keepAlive.setOnPreferenceChangeListener { _, _ ->
             AutoEnableUtils.updateMonitoring(requireContext())
             true
         }
@@ -139,14 +117,6 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
         val autoEnable = findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_enable")
         val autoEnableMethod =
             findPreferenceNotNull<ListPreference>("applist_whitelist_auto_enable_method")
-        val autoDisableService =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_disable_service")
-        val autoStopOnExit =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_stop_on_exit")
-        val autoStrict =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_strict")
-        val keepAlive =
-            findPreferenceNotNull<SwitchPreference>("applist_whitelist_keep_alive")
         val batteryOptimization = findPreferenceNotNull<Preference>("battery_optimization")
         val storageAccess = findPreferenceNotNull<Preference>("storage_access")
 
@@ -176,9 +146,6 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                         selectedApps.isVisible = false
                         autoEnable.isVisible = false
                         autoEnableMethod.isVisible = false
-                        autoDisableService.isVisible = false
-                        autoStopOnExit.isVisible = false
-                        autoStrict.isVisible = false
                     }
                     "blacklist", "whitelist" -> {
                         applistType.isVisible = true
@@ -186,24 +153,12 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                         autoEnable.isVisible = applistType.value == "whitelist"
                         autoEnableMethod.isVisible =
                             applistType.value == "whitelist" && autoEnable.isChecked
-                        autoDisableService.isVisible =
-                            applistType.value == "whitelist" && autoEnable.isChecked
-                        autoStopOnExit.isVisible =
-                            applistType.value == "whitelist" && autoEnable.isChecked
-                        autoStrict.isVisible =
-                            applistType.value == "whitelist" && autoEnable.isChecked
-                        keepAlive.isVisible =
-                            applistType.value == "whitelist" && autoEnable.isChecked
                     }
                     else -> {
                         applistType.isVisible = true
                         selectedApps.isVisible = false
                         autoEnable.isVisible = false
                         autoEnableMethod.isVisible = false
-                        autoDisableService.isVisible = false
-                        autoStopOnExit.isVisible = false
-                        autoStrict.isVisible = false
-                        keepAlive.isVisible = false
                         Log.w(TAG, "Unexpected applistType value: ${applistType.value}")
                     }
                 }
@@ -216,10 +171,6 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                 selectedApps.isVisible = false
                 autoEnable.isVisible = false
                 autoEnableMethod.isVisible = false
-                autoDisableService.isVisible = false
-                autoStopOnExit.isVisible = false
-                autoStrict.isVisible = false
-                keepAlive.isVisible = false
             }
         }
 

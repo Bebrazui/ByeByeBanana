@@ -78,34 +78,6 @@
             android:summary="%s"
             android:defaultValue="usage_stats" />
 
-        <SwitchPreference
-            android:key="applist_whitelist_auto_strict"
-            android:icon="@drawable/ic_check"
-            android:title="@string/applist_whitelist_auto_strict_title"
-            android:summary="@string/applist_whitelist_auto_strict_summary"
-            android:defaultValue="false" />
-
-        <SwitchPreference
-            android:key="applist_whitelist_keep_alive"
-            android:icon="@drawable/ic_notification"
-            android:title="@string/applist_whitelist_keep_alive_title"
-            android:summary="@string/applist_whitelist_keep_alive_summary"
-            android:defaultValue="false" />
-
-        <SwitchPreference
-            android:key="applist_whitelist_auto_stop_on_exit"
-            android:icon="@drawable/ic_power"
-            android:title="@string/applist_whitelist_auto_stop_on_exit_title"
-            android:summary="@string/applist_whitelist_auto_stop_on_exit_summary"
-            android:defaultValue="false" />
-
-        <SwitchPreference
-            android:key="applist_whitelist_auto_disable_service"
-            android:icon="@drawable/material_alert"
-            android:title="@string/applist_whitelist_auto_disable_service_title"
-            android:summary="@string/applist_whitelist_auto_disable_service_summary"
-            android:defaultValue="false" />
-
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory

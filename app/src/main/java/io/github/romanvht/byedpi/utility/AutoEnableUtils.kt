@@ -15,16 +15,12 @@ object AutoEnableUtils {
     const val PREF_AUTO_ENABLE = "applist_whitelist_auto_enable"
     const val PREF_AUTO_METHOD = "applist_whitelist_auto_enable_method"
     const val PREF_AUTO_ACTIVE = "applist_whitelist_auto_active"
-    const val PREF_AUTO_DISABLE_SERVICE = "applist_whitelist_auto_disable_service"
     const val PREF_AUTO_STOP_ON_EXIT = "applist_whitelist_auto_stop_on_exit"
-    const val PREF_AUTO_STRICT = "applist_whitelist_auto_strict"
-    const val PREF_KEEP_ALIVE = "applist_whitelist_keep_alive"
 
     const val METHOD_USAGE_STATS = "usage_stats"
     const val METHOD_ACCESSIBILITY = "accessibility"
 
     fun shouldMonitor(prefs: android.content.SharedPreferences): Boolean {
-        if (prefs.getBoolean(PREF_AUTO_DISABLE_SERVICE, false)) return false
         return prefs.mode() == Mode.VPN &&
             prefs.getStringNotNull("applist_type", "disable") == "whitelist" &&
             prefs.getBoolean(PREF_AUTO_ENABLE, false)
@@ -33,10 +29,9 @@ object AutoEnableUtils {
     fun updateMonitoring(context: Context) {
         val prefs = context.getPreferences()
         val shouldMonitor = shouldMonitor(prefs)
-        val strict = prefs.getBoolean(PREF_AUTO_STRICT, false)
-        val keepAlive = prefs.getBoolean(PREF_KEEP_ALIVE, false) || strict
-        val method = if (strict) METHOD_ACCESSIBILITY
-        else prefs.getStringNotNull(PREF_AUTO_METHOD, METHOD_USAGE_STATS)
+        val strict = true
+        val keepAlive = true
+        val method = METHOD_ACCESSIBILITY
 
         if (keepAlive && shouldMonitor) {
             AppKeepAliveService.start(context)
@@ -63,8 +58,8 @@ object AutoEnableUtils {
     }
 
     private const val STOP_DELAY_MS = 3000L
-    private const val START_COOLDOWN_MS = 1500L
-    private const val START_STABLE_MS = 800L
+    private const val START_COOLDOWN_MS = 50L
+    private const val START_STABLE_MS = 50L
     private var lastPackage: String? = null
     private var lastPackageChangeMs: Long = 0
     private var lastStartMs: Long = 0
@@ -76,7 +71,7 @@ object AutoEnableUtils {
         if (isIgnorablePackage(context, packageName)) return
 
         val prefs = context.getPreferences()
-        val strict = prefs.getBoolean(PREF_AUTO_STRICT, false)
+        val strict = true
         val stopOnExit = if (strict) false else prefs.getBoolean(PREF_AUTO_STOP_ON_EXIT, false)
         if (!shouldMonitor(prefs)) {
             clearAutoActiveIfNeeded(context)

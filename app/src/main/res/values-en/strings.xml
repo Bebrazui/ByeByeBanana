@@ -187,14 +187,6 @@
     <string name="applist_whitelist_auto_enable_title">Auto-enable for whitelist</string>
     <string name="applist_whitelist_auto_enable_summary">Automatically starts the service when whitelist apps open</string>
     <string name="applist_whitelist_auto_enable_method_title">Tracking method</string>
-    <string name="applist_whitelist_auto_stop_on_exit_title">Disable VPN on app exit</string>
-    <string name="applist_whitelist_auto_stop_on_exit_summary">Works together with whitelist auto-enable</string>
-    <string name="applist_whitelist_auto_disable_service_title">Disable auto-enable service</string>
-    <string name="applist_whitelist_auto_disable_service_summary">Turns off the monitoring service if it causes issues</string>
-    <string name="applist_whitelist_auto_strict_title">Strict auto-enable mode</string>
-    <string name="applist_whitelist_auto_strict_summary">Accessibility only, stable start, no auto-stop</string>
-    <string name="applist_whitelist_keep_alive_title">Keep service alive</string>
-    <string name="applist_whitelist_keep_alive_summary">Keeps auto-enable working without opening the app</string>
     <string name="logs_category">Logs</string>
     <string name="inapp_logs_enable_title">In-app logs</string>
     <string name="inapp_logs_enable_summary">Record key events to the log</string>
