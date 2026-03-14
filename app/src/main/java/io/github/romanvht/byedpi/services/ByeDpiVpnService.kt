@@ -382,6 +382,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
         val preferences = getPreferences()
         val listType = preferences.getStringNotNull("applist_type", "disable")
         val listedApps = preferences.getSelectedApps()
+        val hasListedApps = listedApps.isNotEmpty()
 
         when (listType) {
             "blacklist" -> {
@@ -397,11 +398,16 @@ class ByeDpiVpnService : LifecycleVpnService() {
             }
 
             "whitelist" -> {
+                if (!hasListedApps) {
+                    Log.w(TAG, "Whitelist enabled but no apps selected; disabling app filter")
+                    builder.addDisallowedApplication(applicationContext.packageName)
+                    return builder
+                }
                 for (packageName in listedApps) {
                     try {
                         builder.addAllowedApplication(packageName)
                     } catch (e: Exception) {
-                        Log.e(TAG, "Не удалось добавить приложение $packageName в белый список", e)
+                        Log.e(TAG, "???? ?????????????? ???????????????? ???????????????????? $packageName ?? ?????????? ????????????", e)
                     }
                 }
             }
