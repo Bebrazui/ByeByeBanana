@@ -11,6 +11,7 @@
 
     <array name="themes">
         <item name="system">Sistem</item>
+        <item name="dynamic">Dinamik</item>
         <item name="light">Açık</item>
         <item name="dark">Karanlık</item>
     </array>

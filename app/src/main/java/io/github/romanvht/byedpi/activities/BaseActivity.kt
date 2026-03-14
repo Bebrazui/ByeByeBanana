@@ -20,7 +20,9 @@ abstract class BaseActivity : AppCompatActivity() {
         SettingsUtils.setTheme(theme)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            DynamicColors.applyToActivityIfAvailable(this)
+            if (theme == "dynamic") {
+                DynamicColors.applyToActivityIfAvailable(this)
+            }
         }
 
         super.onCreate(savedInstanceState)

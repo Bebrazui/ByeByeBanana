@@ -11,6 +11,7 @@
 
     <array name="themes">
         <item name="system">Theo hệ thống</item>
+        <item name="dynamic">Động</item>
         <item name="light">Sáng</item>
         <item name="dark">Tối</item>
     </array>

@@ -50,6 +50,7 @@ object SettingsUtils {
         "system" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         "light" -> AppCompatDelegate.MODE_NIGHT_NO
         "dark" -> AppCompatDelegate.MODE_NIGHT_YES
+        "dynamic" -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         else -> {
             Log.w(TAG, "Invalid value for app_theme: $name")
             null

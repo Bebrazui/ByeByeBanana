@@ -19,11 +19,13 @@
 
     <array name="themes">
         <item name="system">Системная</item>
+        <item name="dynamic">Динамическая</item>
         <item name="light">Светлая</item>
         <item name="dark">Темная</item>
     </array>
     <array name="themes_entries">
         <item name="system">system</item>
+        <item name="dynamic">dynamic</item>
         <item name="light">light</item>
         <item name="dark">dark</item>
     </array>

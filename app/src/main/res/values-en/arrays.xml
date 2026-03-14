@@ -11,6 +11,7 @@
 
     <array name="themes">
         <item name="system">System</item>
+        <item name="dynamic">Dynamic</item>
         <item name="light">Light</item>
         <item name="dark">Dark</item>
     </array>
