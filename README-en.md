@@ -3,6 +3,7 @@
 English | [Русский](README.md) | [Türkçe](README-tr.md)
 
 Local Android client for ByeDPI. The app runs a local proxy and routes traffic through it. It is **not** a remote VPN server and does not send traffic anywhere.
+Fork of the original ByeByeDPI Android project.
 
 <p align="center">
   <img src="docs/images/logo_round.png" alt="ByeByeBanana icon" width="160" />
@@ -48,6 +49,7 @@ To get the certificate SHA‑256:
 ```bash
 keytool -list -v -keystore release.jks -alias byebd | rg -n \"SHA256\"
 ```
+SHA‑256: 98:F0:A2:B8:90:B7:C3:E1:78:5D:18:24:7D:E1:52:B4:44:C8:C6:EE:42:6C:BB:7B:1E:61:4E:47:9F:40:E3:20
 
 ## Dependencies
 - ByeDPI

@@ -3,6 +3,7 @@
 Türkçe | [Русский](README.md) | [English](README-en.md)
 
 ByeDPI için yerel Android istemcisi. Uygulama yerel bir proxy çalıştırır ve trafiği buradan geçirir. **Uzak VPN sunucusu değildir** ve trafik başka bir yere gönderilmez.
+Orijinal ByeByeDPI Android projesinin forkudur.
 
 <p align="center">
   <img src="docs/images/logo_round.png" alt="ByeByeBanana icon" width="160" />
@@ -48,6 +49,7 @@ Sertifika SHA‑256 için:
 ```bash
 keytool -list -v -keystore release.jks -alias byebd | rg -n \"SHA256\"
 ```
+SHA‑256: 98:F0:A2:B8:90:B7:C3:E1:78:5D:18:24:7D:E1:52:B4:44:C8:C6:EE:42:6C:BB:7B:1E:61:4E:47:9F:40:E3:20
 
 ## Bağımlılıklar
 - ByeDPI
