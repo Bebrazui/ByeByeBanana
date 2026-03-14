@@ -198,6 +198,12 @@
     <string name="logs_copy">Copy</string>
     <string name="keep_alive_channel_name">Background operation</string>
     <string name="keep_alive_notification_content">Auto-enable support</string>
+    <string name="speed_format">Speed: ⬇ %1$s • ⬆ %2$s</string>
+    <string name="widget_title">ByeByeBanana</string>
+    <string name="widget_toggle">Toggle</string>
+    <string name="widget_start">Start</string>
+    <string name="widget_stop">Stop</string>
+    <string name="widget_hint">Quick control</string>
     <string name="auto_enable_channel_name">Auto enable</string>
     <string name="auto_enable_notification_content">Monitoring apps for auto-enable</string>
     <string name="auto_enable_accessibility_label">ByeByeDPI auto enable</string>

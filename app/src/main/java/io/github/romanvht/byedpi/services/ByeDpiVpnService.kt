@@ -30,6 +30,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
     private val byeDpiProxy = ByeDpiProxy()
     private var proxyJob: Job? = null
     private var tunFd: ParcelFileDescriptor? = null
+    private var speedJob: Job? = null
     private val mutex = Mutex()
 
     companion object {
@@ -125,6 +126,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
                 startProxy()
                 startTun2Socks()
                 updateStatus(ServiceStatus.Connected)
+                startSpeedMonitor()
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start VPN", e)
@@ -163,6 +165,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
             updateStatus(ServiceStatus.Disconnected)
         }
 
+        stopSpeedMonitor()
         stopSelf()
     }
 
@@ -335,6 +338,38 @@ class ByeDpiVpnService : LifecycleVpnService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             QuickTileService.updateTile()
         }
+    }
+
+    private fun startSpeedMonitor() {
+        if (speedJob != null) return
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        var prev = SpeedUtils.nowSample()
+        speedJob = lifecycleScope.launch(Dispatchers.IO) {
+            while (true) {
+                delay(1000)
+                val curr = SpeedUtils.nowSample()
+                val (rx, tx) = SpeedUtils.calcSpeed(prev, curr)
+                prev = curr
+                val speedText = getString(
+                    R.string.speed_format,
+                    SpeedUtils.formatSpeed(rx),
+                    SpeedUtils.formatSpeed(tx)
+                )
+                val notification = createConnectionNotificationText(
+                    this@ByeDpiVpnService,
+                    NOTIFICATION_CHANNEL_ID,
+                    R.string.notification_title,
+                    speedText,
+                    ByeDpiVpnService::class.java,
+                )
+                notificationManager.notify(FOREGROUND_SERVICE_ID, notification)
+            }
+        }
+    }
+
+    private fun stopSpeedMonitor() {
+        speedJob?.cancel()
+        speedJob = null
     }
 
     private fun createNotification(): Notification =

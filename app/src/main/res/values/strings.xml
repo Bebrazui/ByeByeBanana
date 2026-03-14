@@ -198,6 +198,12 @@
     <string name="logs_copy">Копировать</string>
     <string name="keep_alive_channel_name">Фоновая работа</string>
     <string name="keep_alive_notification_content">Поддержка автовключения</string>
+    <string name="speed_format">Скорость: ⬇ %1$s • ⬆ %2$s</string>
+    <string name="widget_title">ByeByeBanana</string>
+    <string name="widget_toggle">Вкл/выкл</string>
+    <string name="widget_start">Включить</string>
+    <string name="widget_stop">Выключить</string>
+    <string name="widget_hint">Быстрое управление</string>
     <string name="auto_enable_channel_name">Автовключение</string>
     <string name="auto_enable_notification_content">Мониторинг приложений для автовключения</string>
     <string name="auto_enable_accessibility_label">Автовключение ByeByeDPI</string>

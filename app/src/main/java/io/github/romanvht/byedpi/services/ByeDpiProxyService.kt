@@ -25,6 +25,7 @@ import kotlinx.coroutines.withTimeoutOrNull
 class ByeDpiProxyService : LifecycleService() {
     private var proxy = ByeDpiProxy()
     private var proxyJob: Job? = null
+    private var speedJob: Job? = null
     private val mutex = Mutex()
 
     companion object {
@@ -106,6 +107,7 @@ class ByeDpiProxyService : LifecycleService() {
                 }
                 startProxy()
                 updateStatus(ServiceStatus.Connected)
+                startSpeedMonitor()
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start proxy", e)
@@ -137,6 +139,7 @@ class ByeDpiProxyService : LifecycleService() {
             updateStatus(ServiceStatus.Disconnected)
         }
 
+        stopSpeedMonitor()
         stopSelf()
     }
 
@@ -253,5 +256,37 @@ class ByeDpiProxyService : LifecycleService() {
 
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(PAUSE_NOTIFICATION_ID, notification)
+    }
+
+    private fun startSpeedMonitor() {
+        if (speedJob != null) return
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        var prev = SpeedUtils.nowSample()
+        speedJob = lifecycleScope.launch(Dispatchers.IO) {
+            while (true) {
+                delay(1000)
+                val curr = SpeedUtils.nowSample()
+                val (rx, tx) = SpeedUtils.calcSpeed(prev, curr)
+                prev = curr
+                val speedText = getString(
+                    R.string.speed_format,
+                    SpeedUtils.formatSpeed(rx),
+                    SpeedUtils.formatSpeed(tx)
+                )
+                val notification = createConnectionNotificationText(
+                    this@ByeDpiProxyService,
+                    NOTIFICATION_CHANNEL_ID,
+                    R.string.notification_title,
+                    speedText,
+                    ByeDpiProxyService::class.java,
+                )
+                notificationManager.notify(FOREGROUND_SERVICE_ID, notification)
+            }
+        }
+    }
+
+    private fun stopSpeedMonitor() {
+        speedJob?.cancel()
+        speedJob = null
     }
 }

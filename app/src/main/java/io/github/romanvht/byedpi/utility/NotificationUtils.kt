@@ -70,6 +70,44 @@ fun createConnectionNotification(
         )
         .build()
 
+fun createConnectionNotificationText(
+    context: Context,
+    channelId: String,
+    @StringRes title: Int,
+    content: String,
+    service: Class<*>,
+): Notification =
+    NotificationCompat.Builder(context, channelId)
+        .setSmallIcon(R.drawable.ic_notification)
+        .setSilent(true)
+        .setContentTitle(context.getString(title))
+        .setContentText(content)
+        .addAction(0, context.getString(R.string.service_pause_btn),
+            PendingIntent.getService(
+                context,
+                0,
+                Intent(context, service).setAction(PAUSE_ACTION),
+                PendingIntent.FLAG_IMMUTABLE,
+            )
+        )
+        .addAction(0, context.getString(R.string.service_stop_btn),
+            PendingIntent.getService(
+                context,
+                0,
+                Intent(context, service).setAction(STOP_ACTION),
+                PendingIntent.FLAG_IMMUTABLE,
+            )
+        )
+        .setContentIntent(
+            PendingIntent.getActivity(
+                context,
+                0,
+                Intent(context, MainActivity::class.java),
+                PendingIntent.FLAG_IMMUTABLE,
+            )
+        )
+        .build()
+
 fun createPauseNotification(
     context: Context,
     channelId: String,
