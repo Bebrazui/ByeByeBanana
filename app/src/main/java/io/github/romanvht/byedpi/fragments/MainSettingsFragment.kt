@@ -62,12 +62,22 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                 true
             }
 
+        findPreferenceNotNull<Preference>("inapp_logs_open")
+            .setOnPreferenceClickListener {
+                startActivity(Intent(requireContext(), io.github.romanvht.byedpi.activities.LogsActivity::class.java))
+                true
+            }
+
         findPreferenceNotNull<Preference>("version").summary = BuildConfig.VERSION_NAME
         findPreferenceNotNull<Preference>("byedpi_version").summary = "0.17.3"
 
         val autoEnable = findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_enable")
         val autoEnableMethod =
             findPreferenceNotNull<ListPreference>("applist_whitelist_auto_enable_method")
+        val autoStrict =
+            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_strict")
+        val autoStopOnExit =
+            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_stop_on_exit")
 
         autoEnable.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {
@@ -80,6 +90,17 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
         autoEnableMethod.setOnPreferenceChangeListener { _, newValue ->
             if (autoEnable.isChecked) {
                 requestAutoEnablePermission(newValue as String)
+            }
+            AutoEnableUtils.updateMonitoring(requireContext())
+            true
+        }
+
+        autoStrict.setOnPreferenceChangeListener { _, newValue ->
+            val enabled = newValue as Boolean
+            if (enabled) {
+                autoEnableMethod.value = AutoEnableUtils.METHOD_ACCESSIBILITY
+                autoStopOnExit.isChecked = false
+                requestAutoEnablePermission(AutoEnableUtils.METHOD_ACCESSIBILITY)
             }
             AutoEnableUtils.updateMonitoring(requireContext())
             true
@@ -115,6 +136,8 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
             findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_disable_service")
         val autoStopOnExit =
             findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_stop_on_exit")
+        val autoStrict =
+            findPreferenceNotNull<SwitchPreference>("applist_whitelist_auto_strict")
         val batteryOptimization = findPreferenceNotNull<Preference>("battery_optimization")
         val storageAccess = findPreferenceNotNull<Preference>("storage_access")
 
@@ -146,6 +169,7 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                         autoEnableMethod.isVisible = false
                         autoDisableService.isVisible = false
                         autoStopOnExit.isVisible = false
+                        autoStrict.isVisible = false
                     }
                     "blacklist", "whitelist" -> {
                         applistType.isVisible = true
@@ -157,6 +181,8 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                             applistType.value == "whitelist" && autoEnable.isChecked
                         autoStopOnExit.isVisible =
                             applistType.value == "whitelist" && autoEnable.isChecked
+                        autoStrict.isVisible =
+                            applistType.value == "whitelist" && autoEnable.isChecked
                     }
                     else -> {
                         applistType.isVisible = true
@@ -165,6 +191,7 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                         autoEnableMethod.isVisible = false
                         autoDisableService.isVisible = false
                         autoStopOnExit.isVisible = false
+                        autoStrict.isVisible = false
                         Log.w(TAG, "Unexpected applistType value: ${applistType.value}")
                     }
                 }
@@ -179,6 +206,7 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
                 autoEnableMethod.isVisible = false
                 autoDisableService.isVisible = false
                 autoStopOnExit.isVisible = false
+                autoStrict.isVisible = false
             }
         }
 

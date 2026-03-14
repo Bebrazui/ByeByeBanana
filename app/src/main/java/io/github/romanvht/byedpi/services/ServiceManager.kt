@@ -8,6 +8,7 @@ import io.github.romanvht.byedpi.data.AppStatus
 import io.github.romanvht.byedpi.data.Mode
 import io.github.romanvht.byedpi.data.START_ACTION
 import io.github.romanvht.byedpi.data.STOP_ACTION
+import io.github.romanvht.byedpi.utility.InAppLog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -22,6 +23,7 @@ object ServiceManager {
         when (mode) {
             Mode.VPN -> {
                 Log.i(TAG, "Starting VPN")
+                InAppLog.i(context, TAG, "Starting VPN")
                 val intent = Intent(context, ByeDpiVpnService::class.java)
                 intent.action = START_ACTION
                 ContextCompat.startForegroundService(context, intent)
@@ -29,6 +31,7 @@ object ServiceManager {
 
             Mode.Proxy -> {
                 Log.i(TAG, "Starting proxy")
+                InAppLog.i(context, TAG, "Starting proxy")
                 val intent = Intent(context, ByeDpiProxyService::class.java)
                 intent.action = START_ACTION
                 ContextCompat.startForegroundService(context, intent)
@@ -41,6 +44,7 @@ object ServiceManager {
         when (mode) {
             Mode.VPN -> {
                 Log.i(TAG, "Stopping VPN")
+                InAppLog.i(context, TAG, "Stopping VPN")
                 val intent = Intent(context, ByeDpiVpnService::class.java)
                 intent.action = STOP_ACTION
                 ContextCompat.startForegroundService(context, intent)
@@ -48,6 +52,7 @@ object ServiceManager {
 
             Mode.Proxy -> {
                 Log.i(TAG, "Stopping proxy")
+                InAppLog.i(context, TAG, "Stopping proxy")
                 val intent = Intent(context, ByeDpiProxyService::class.java)
                 intent.action = STOP_ACTION
                 ContextCompat.startForegroundService(context, intent)

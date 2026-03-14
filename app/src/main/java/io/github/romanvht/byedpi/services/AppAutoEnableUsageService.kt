@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import io.github.romanvht.byedpi.R
 import io.github.romanvht.byedpi.utility.AutoEnableUtils
+import io.github.romanvht.byedpi.utility.InAppLog
 import io.github.romanvht.byedpi.utility.UsageAccessUtils
 import io.github.romanvht.byedpi.utility.registerNotificationChannel
 import kotlinx.coroutines.CoroutineScope
@@ -28,11 +29,13 @@ class AppAutoEnableUsageService : Service() {
         private const val NOTIFICATION_ID = 4
 
         fun start(context: Context) {
+            InAppLog.i(context, "AutoEnableUsage", "Start service")
             val intent = Intent(context, AppAutoEnableUsageService::class.java)
             ContextCompat.startForegroundService(context, intent)
         }
 
         fun stop(context: Context) {
+            InAppLog.i(context, "AutoEnableUsage", "Stop service")
             val intent = Intent(context, AppAutoEnableUsageService::class.java)
             context.stopService(intent)
         }

@@ -79,6 +79,13 @@
             android:defaultValue="usage_stats" />
 
         <SwitchPreference
+            android:key="applist_whitelist_auto_strict"
+            android:icon="@drawable/ic_check"
+            android:title="@string/applist_whitelist_auto_strict_title"
+            android:summary="@string/applist_whitelist_auto_strict_summary"
+            android:defaultValue="false" />
+
+        <SwitchPreference
             android:key="applist_whitelist_auto_stop_on_exit"
             android:icon="@drawable/ic_power"
             android:title="@string/applist_whitelist_auto_stop_on_exit_title"
@@ -91,6 +98,24 @@
             android:title="@string/applist_whitelist_auto_disable_service_title"
             android:summary="@string/applist_whitelist_auto_disable_service_summary"
             android:defaultValue="false" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
+        android:title="@string/logs_category">
+
+        <SwitchPreference
+            android:key="inapp_logs_enable"
+            android:icon="@drawable/ic_description"
+            android:title="@string/inapp_logs_enable_title"
+            android:summary="@string/inapp_logs_enable_summary"
+            android:defaultValue="false" />
+
+        <Preference
+            android:key="inapp_logs_open"
+            android:icon="@drawable/ic_description"
+            android:title="@string/inapp_logs_open_title"
+            android:summary="@string/inapp_logs_open_summary" />
 
     </androidx.preference.PreferenceCategory>
 

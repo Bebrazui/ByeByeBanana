@@ -106,6 +106,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private suspend fun start() {
         Log.i(TAG, "Starting")
+        InAppLog.i(this, TAG, "Starting")
 
         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.cancel(PAUSE_NOTIFICATION_ID)
@@ -127,6 +128,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
             }
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start VPN", e)
+            InAppLog.e(this, TAG, "Failed to start VPN: ${e.message}")
             updateStatus(ServiceStatus.Failed)
             stop()
         }
@@ -147,6 +149,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private suspend fun stop() {
         Log.i(TAG, "Stopping")
+        InAppLog.i(this, TAG, "Stopping")
 
         mutex.withLock {
             try {
@@ -165,6 +168,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun startProxy() {
         Log.i(TAG, "Starting proxy")
+        InAppLog.i(this, TAG, "Starting proxy")
 
         if (proxyJob != null) {
             Log.w(TAG, "Proxy fields not null")
@@ -179,6 +183,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
             if (code != 0) {
                 Log.e(TAG, "Proxy stopped with code $code")
+                InAppLog.e(this@ByeDpiVpnService, TAG, "Proxy stopped with code $code")
                 updateStatus(ServiceStatus.Failed)
             } else {
                 updateStatus(ServiceStatus.Disconnected)
@@ -223,6 +228,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun startTun2Socks() {
         Log.i(TAG, "Starting tun2socks")
+        InAppLog.i(this, TAG, "Starting tun2socks")
 
         if (tunFd != null) {
             throw IllegalStateException("VPN field not null")
@@ -264,10 +270,12 @@ class ByeDpiVpnService : LifecycleVpnService() {
         TProxyService.TProxyStartService(configPath.absolutePath, fd.fd)
 
         Log.i(TAG, "Tun2Socks started. ip: $ip port: $port")
+        InAppLog.i(this, TAG, "Tun2Socks started. ip: $ip port: $port")
     }
 
     private fun stopTun2Socks() {
         Log.i(TAG, "Stopping tun2socks")
+        InAppLog.i(this, TAG, "Stopping tun2socks")
 
         try {
             TProxyService.TProxyStopService()
@@ -297,6 +305,7 @@ class ByeDpiVpnService : LifecycleVpnService() {
 
     private fun updateStatus(newStatus: ServiceStatus) {
         Log.d(TAG, "VPN status changed from $status to $newStatus")
+        InAppLog.d(this, TAG, "VPN status changed from $status to $newStatus")
 
         status = newStatus
 

@@ -191,6 +191,16 @@
     <string name="applist_whitelist_auto_stop_on_exit_summary">Работает вместе с автовключением для белого списка</string>
     <string name="applist_whitelist_auto_disable_service_title">Отключить службу автовключения</string>
     <string name="applist_whitelist_auto_disable_service_summary">Полностью отключает службу мониторинга, если она мешает</string>
+    <string name="applist_whitelist_auto_strict_title">Строгий режим автовключения</string>
+    <string name="applist_whitelist_auto_strict_summary">Только Accessibility, стабильный запуск, без автo-остановки</string>
+    <string name="logs_category">Логи</string>
+    <string name="inapp_logs_enable_title">Логи в приложении</string>
+    <string name="inapp_logs_enable_summary">Записывать ключевые события в журнал</string>
+    <string name="inapp_logs_open_title">Открыть журнал</string>
+    <string name="inapp_logs_open_summary">Показать логи приложения</string>
+    <string name="inapp_logs_title">Журнал</string>
+    <string name="logs_refresh">Обновить</string>
+    <string name="logs_clear">Очистить</string>
     <string name="auto_enable_channel_name">Автовключение</string>
     <string name="auto_enable_notification_content">Мониторинг приложений для автовключения</string>
     <string name="auto_enable_accessibility_label">Автовключение ByeByeDPI</string>

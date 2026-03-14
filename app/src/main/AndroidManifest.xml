@@ -66,6 +66,11 @@
             android:exported="true"/>
 
         <activity
+            android:name=".activities.LogsActivity"
+            android:label="@string/inapp_logs_title"
+            android:exported="false"/>
+
+        <activity
             android:name=".activities.TestActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_test"
